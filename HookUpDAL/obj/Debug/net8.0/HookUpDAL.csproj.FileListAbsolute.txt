@@ -1,0 +1,14 @@
+C:\Users\murmu\OneDrive\Desktop\Book WebApi\HookUp\HookUpDAL\bin\Debug\net8.0\HookUpDAL.deps.json
+C:\Users\murmu\OneDrive\Desktop\Book WebApi\HookUp\HookUpDAL\bin\Debug\net8.0\HookUpDAL.runtimeconfig.json
+C:\Users\murmu\OneDrive\Desktop\Book WebApi\HookUp\HookUpDAL\bin\Debug\net8.0\HookUpDAL.dll
+C:\Users\murmu\OneDrive\Desktop\Book WebApi\HookUp\HookUpDAL\bin\Debug\net8.0\HookUpDAL.pdb
+C:\Users\murmu\OneDrive\Desktop\Book WebApi\HookUp\HookUpDAL\obj\Debug\net8.0\HookUpDAL.csproj.AssemblyReference.cache
+C:\Users\murmu\OneDrive\Desktop\Book WebApi\HookUp\HookUpDAL\obj\Debug\net8.0\HookUpDAL.GeneratedMSBuildEditorConfig.editorconfig
+C:\Users\murmu\OneDrive\Desktop\Book WebApi\HookUp\HookUpDAL\obj\Debug\net8.0\HookUpDAL.AssemblyInfoInputs.cache
+C:\Users\murmu\OneDrive\Desktop\Book WebApi\HookUp\HookUpDAL\obj\Debug\net8.0\HookUpDAL.AssemblyInfo.cs
+C:\Users\murmu\OneDrive\Desktop\Book WebApi\HookUp\HookUpDAL\obj\Debug\net8.0\HookUpDAL.csproj.CoreCompileInputs.cache
+C:\Users\murmu\OneDrive\Desktop\Book WebApi\HookUp\HookUpDAL\obj\Debug\net8.0\HookUpDAL.dll
+C:\Users\murmu\OneDrive\Desktop\Book WebApi\HookUp\HookUpDAL\obj\Debug\net8.0\refint\HookUpDAL.dll
+C:\Users\murmu\OneDrive\Desktop\Book WebApi\HookUp\HookUpDAL\obj\Debug\net8.0\HookUpDAL.pdb
+C:\Users\murmu\OneDrive\Desktop\Book WebApi\HookUp\HookUpDAL\obj\Debug\net8.0\HookUpDAL.genruntimeconfig.cache
+C:\Users\murmu\OneDrive\Desktop\Book WebApi\HookUp\HookUpDAL\obj\Debug\net8.0\ref\HookUpDAL.dll

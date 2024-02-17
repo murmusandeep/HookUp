@@ -1,0 +1,6 @@
+@HookUpApi_HostAddress = http://localhost:5027
+
+GET {{HookUpApi_HostAddress}}/weatherforecast/
+Accept: application/json
+
+###
