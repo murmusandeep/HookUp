@@ -15,3 +15,4 @@ C:\Users\murmu\OneDrive\Desktop\Book WebApi\HookUp\HookUpBLL\obj\Debug\net8.0\Ho
 C:\Users\murmu\OneDrive\Desktop\Book WebApi\HookUp\HookUpBLL\obj\Debug\net8.0\ref\HookUpBLL.dll
 C:\Users\murmu\OneDrive\Desktop\Book WebApi\HookUp\HookUpBLL\bin\Debug\net8.0\Entities.dll
 C:\Users\murmu\OneDrive\Desktop\Book WebApi\HookUp\HookUpBLL\bin\Debug\net8.0\Entities.pdb
+C:\Users\murmu\OneDrive\Desktop\Book WebApi\HookUp\HookUpBLL\obj\Debug\net8.0\HookUpBLL.sourcelink.json

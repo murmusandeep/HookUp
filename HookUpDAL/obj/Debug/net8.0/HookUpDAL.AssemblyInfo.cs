@@ -14,7 +14,7 @@ using System.Reflection;
 [assembly: System.Reflection.AssemblyCompanyAttribute("HookUpDAL")]
 [assembly: System.Reflection.AssemblyConfigurationAttribute("Debug")]
 [assembly: System.Reflection.AssemblyFileVersionAttribute("1.0.0.0")]
-[assembly: System.Reflection.AssemblyInformationalVersionAttribute("1.0.0")]
+[assembly: System.Reflection.AssemblyInformationalVersionAttribute("1.0.0+e3c57753487fe03a8a5fdb12cb92be8e55d5ab64")]
 [assembly: System.Reflection.AssemblyProductAttribute("HookUpDAL")]
 [assembly: System.Reflection.AssemblyTitleAttribute("HookUpDAL")]
 [assembly: System.Reflection.AssemblyVersionAttribute("1.0.0.0")]
