@@ -12,3 +12,4 @@ C:\Users\murmu\OneDrive\Desktop\Book WebApi\HookUp\HookUpDAL\obj\Debug\net8.0\re
 C:\Users\murmu\OneDrive\Desktop\Book WebApi\HookUp\HookUpDAL\obj\Debug\net8.0\HookUpDAL.pdb
 C:\Users\murmu\OneDrive\Desktop\Book WebApi\HookUp\HookUpDAL\obj\Debug\net8.0\HookUpDAL.genruntimeconfig.cache
 C:\Users\murmu\OneDrive\Desktop\Book WebApi\HookUp\HookUpDAL\obj\Debug\net8.0\ref\HookUpDAL.dll
+C:\Users\murmu\OneDrive\Desktop\Book WebApi\HookUp\HookUpDAL\obj\Debug\net8.0\HookUpDAL.sourcelink.json
