@@ -14,7 +14,7 @@ using System.Reflection;
 [assembly: System.Reflection.AssemblyCompanyAttribute("HookUpBLL")]
 [assembly: System.Reflection.AssemblyConfigurationAttribute("Debug")]
 [assembly: System.Reflection.AssemblyFileVersionAttribute("1.0.0.0")]
-[assembly: System.Reflection.AssemblyInformationalVersionAttribute("1.0.0+e3c57753487fe03a8a5fdb12cb92be8e55d5ab64")]
+[assembly: System.Reflection.AssemblyInformationalVersionAttribute("1.0.0+1488b8724a0b9bbf5077225785de900ac5e6658a")]
 [assembly: System.Reflection.AssemblyProductAttribute("HookUpBLL")]
 [assembly: System.Reflection.AssemblyTitleAttribute("HookUpBLL")]
 [assembly: System.Reflection.AssemblyVersionAttribute("1.0.0.0")]

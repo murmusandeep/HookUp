@@ -137,3 +137,4 @@ C:\Users\murmu\OneDrive\Desktop\Book WebApi\HookUp\HookUpApi\bin\Debug\net8.0\zh
 C:\Users\murmu\OneDrive\Desktop\Book WebApi\HookUp\HookUpApi\bin\Debug\net8.0\Entities.dll
 C:\Users\murmu\OneDrive\Desktop\Book WebApi\HookUp\HookUpApi\bin\Debug\net8.0\Entities.pdb
 C:\Users\murmu\OneDrive\Desktop\Book WebApi\HookUp\HookUpApi\obj\Debug\net8.0\HookUpApi.sourcelink.json
+C:\Users\murmu\OneDrive\Desktop\Book WebApi\HookUp\HookUpApi\bin\Debug\net8.0\Microsoft.AspNetCore.Authentication.JwtBearer.dll
