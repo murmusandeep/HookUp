@@ -1,4 +1,6 @@
-﻿using HookUpBLL;
+﻿using HookUpApi.Helpers;
+using HookUpApi.Interfaces;
+using HookUpBLL;
 using HookUpBLL.Interfaces;
 using HookUpDAL;
 using HookUpDAL.Interfaces;
@@ -23,8 +25,12 @@ namespace HookUpApi.Extensions
                 .AllowAnyMethod()
                 .AllowAnyHeader());
             });
+
             services.AddScoped<IUsersBLL, UsersBLL>();
             services.AddScoped<IUsersDAL, UsersDAL>();
+            services.AddScoped<IAccountBLL, AccountBLL>();
+            services.AddScoped<IAccountDAL, AccountDAL>();
+            services.AddScoped<ITokenHelper, TokenHelper>();
 
             return services;
         }

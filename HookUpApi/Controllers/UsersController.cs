@@ -1,11 +1,11 @@
 ﻿using HookUpBLL.Interfaces;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 
 namespace HookUpApi.Controllers
 {
-    [Route("api/[controller]")]
-    [ApiController]
-    public class UsersController : ControllerBase
+    [Authorize]
+    public class UsersController : BaseApiController
     {
         private readonly IUsersBLL _usersBLL;
 
@@ -14,14 +14,15 @@ namespace HookUpApi.Controllers
             _usersBLL = usersBLL;
         }
 
-        [HttpGet("GetUsers")]
+        [AllowAnonymous]
+        [HttpGet]
         public async Task<IActionResult> GetUsers()
         {
             var users = await _usersBLL.GetUsers();
             return Ok(users);
         }
 
-        [HttpGet("GetUser/{id}")]
+        [HttpGet("{id}")]
         public async Task<IActionResult> GetUserById(int id)
         {
             var user = await _usersBLL.GetUserById(id);
