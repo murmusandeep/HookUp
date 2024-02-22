@@ -2,7 +2,7 @@
 {
     public class UserDto
     {
-        public string Useraname { get; set; }
+        public string Username { get; set; }
         public string Token { get; set; }
     }
 }

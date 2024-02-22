@@ -24,7 +24,14 @@ namespace HookUpApi.Controllers
             if (await _accountBLL.UserExists(register.username)) return BadRequest("Username is Taken");
 
             var user = await _accountBLL.Register(register);
-            return Ok(user);
+
+            var userDto = new UserDto
+            {
+                Username = user.UserName,
+                Token = _tokenHelper.CreateToken(user)
+            };
+
+            return Ok(userDto);
         }
 
         [HttpPost("login")]
@@ -45,7 +52,7 @@ namespace HookUpApi.Controllers
 
             var userDto = new UserDto
             {
-                Useraname = user.UserName,
+                Username = user.UserName,
                 Token = _tokenHelper.CreateToken(user)
             };
 
