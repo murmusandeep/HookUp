@@ -1,4 +1,6 @@
 import { Component, OnInit } from '@angular/core';
+import { Router } from '@angular/router';
+import { MessageService } from 'primeng/api';
 import { AccountService } from 'src/app/_services/account.service';
 
 @Component({
@@ -10,30 +12,20 @@ export class NavComponent implements OnInit {
 
   model: any = {};
 
-  constructor(public accountService: AccountService) { }
+  constructor(public accountService: AccountService, private router: Router, private messageService: MessageService) { }
 
-  ngOnInit(): void {
-    //this.getCurrentUser();
-  }
-
-  // getCurrentUser() {
-  //   this.accountService.currentUser$.subscribe({
-  //     next: user => this.loggedIn = !!user,
-  //     error: error => console.log(error)
-  //   })
-  // }
+  ngOnInit(): void { }
 
   login() {
     this.accountService.login(this.model).subscribe({
-      next: (response) => {
-        console.log(response);
-      },
-      error: (error) => console.log(error)
+      next: _ => this.router.navigateByUrl('/members'),
+      error: error => this.messageService.add({ severity: 'error', summary: 'Error', detail: error.error, life: 1000 })
     })
   }
 
   logout() {
     this.accountService.logout();
+    this.router.navigateByUrl('/');
   }
 
 }
