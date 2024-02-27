@@ -30,6 +30,8 @@ namespace HookUpApi.Extensions
             services.AddScoped<IUsersDAL, UsersDAL>();
             services.AddScoped<IAccountBLL, AccountBLL>();
             services.AddScoped<IAccountDAL, AccountDAL>();
+            services.AddScoped<IBuggyBLL, BuggyBLL>();
+            services.AddScoped<IBuggyDAL, BuggyDAL>();
             services.AddScoped<ITokenHelper, TokenHelper>();
 
             return services;
