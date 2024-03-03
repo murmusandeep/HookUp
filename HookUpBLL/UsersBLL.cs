@@ -1,5 +1,5 @@
 ﻿using AutoMapper;
-using Entities.Models;
+using Entities.Dto;
 using HookUpBLL.Interfaces;
 using HookUpDAL.Interfaces;
 
@@ -16,17 +16,24 @@ namespace HookUpBLL
             _mapper = mapper;
         }
 
-        public async Task<User> GetUserById(int id)
+        public async Task<MemberDto> GetUserById(int id)
         {
             var result = await _usersDAL.GetUserById(id);
-            var user = _mapper.Map<User>(result);
+            var user = _mapper.Map<MemberDto>(result);
             return user;
         }
 
-        public async Task<IEnumerable<User>> GetUsers()
+        public async Task<MemberDto> GetUserByName(string name)
+        {
+            var result = await _usersDAL.GetUserByUsername(name);
+            var user = _mapper.Map<MemberDto>(result);
+            return user;
+        }
+
+        public async Task<IEnumerable<MemberDto>> GetUsers()
         {
             var result = await _usersDAL.GetUsers();
-            var users = _mapper.Map<IEnumerable<User>>(result);
+            var users = _mapper.Map<IEnumerable<MemberDto>>(result);
             return users;
         }
     }

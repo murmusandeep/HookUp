@@ -14,7 +14,6 @@ namespace HookUpApi.Controllers
             _usersBLL = usersBLL;
         }
 
-        [AllowAnonymous]
         [HttpGet]
         public async Task<IActionResult> GetUsers()
         {
@@ -26,6 +25,13 @@ namespace HookUpApi.Controllers
         public async Task<IActionResult> GetUserById(int id)
         {
             var user = await _usersBLL.GetUserById(id);
+            return Ok(user);
+        }
+
+        [HttpGet("GetUserByUsername/{username}")]
+        public async Task<IActionResult> GetUserByUsername(string username)
+        {
+            var user = await _usersBLL.GetUserByName(username);
             return Ok(user);
         }
     }
