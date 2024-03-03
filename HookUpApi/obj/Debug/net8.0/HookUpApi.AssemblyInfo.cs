@@ -14,7 +14,7 @@ using System.Reflection;
 [assembly: System.Reflection.AssemblyCompanyAttribute("HookUpApi")]
 [assembly: System.Reflection.AssemblyConfigurationAttribute("Debug")]
 [assembly: System.Reflection.AssemblyFileVersionAttribute("1.0.0.0")]
-[assembly: System.Reflection.AssemblyInformationalVersionAttribute("1.0.0+9f5cb8bdf2d22fca0110524069e5bfb2b60154d0")]
+[assembly: System.Reflection.AssemblyInformationalVersionAttribute("1.0.0+41d3c98c3a8d686a3a9532f7675f5687c6802230")]
 [assembly: System.Reflection.AssemblyProductAttribute("HookUpApi")]
 [assembly: System.Reflection.AssemblyTitleAttribute("HookUpApi")]
 [assembly: System.Reflection.AssemblyVersionAttribute("1.0.0.0")]
