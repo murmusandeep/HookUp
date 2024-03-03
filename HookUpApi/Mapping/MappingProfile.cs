@@ -1,6 +1,7 @@
 ﻿using AutoMapper;
-using Entities.Models;
+using Entities.Dto;
 using HookUpDAL.Entities;
+using HookUpDAL.Extensions;
 
 namespace HookUpApi.Mapping
 {
@@ -8,7 +9,10 @@ namespace HookUpApi.Mapping
     {
         public MappingProfile()
         {
-            CreateMap<User, AppUser>().ReverseMap();
+            CreateMap<AppUser, MemberDto>()
+                .ForMember(dest => dest.PhotoUrl, opt => opt.MapFrom(src => src.Photos.FirstOrDefault(x => x.IsMain).Url))
+                .ForMember(dest => dest.Age, opt => opt.MapFrom(src => src.DateOfBirth.CalculateAge()));
+            CreateMap<Photo, PhotoDto>().ReverseMap();
         }
     }
 }
