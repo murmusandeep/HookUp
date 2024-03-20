@@ -1,6 +1,8 @@
 ﻿using AutoMapper;
 using Entities.Dto;
+using Entities.Exceptions;
 using HookUpBLL.Interfaces;
+using HookUpDAL.Entities;
 using HookUpDAL.Interfaces;
 
 namespace HookUpBLL
@@ -35,6 +37,21 @@ namespace HookUpBLL
             var result = await _usersDAL.GetUsers();
             var users = _mapper.Map<IEnumerable<MemberDto>>(result);
             return users;
+        }
+
+        public async Task<bool> UpdateUser(MemberUpdateDto memberUpdateDto, string username)
+        {
+            var user = await GetUserAndCheckIfItExists(username);
+            _mapper.Map(memberUpdateDto, user);
+            return await _usersDAL.SaveAll();
+        }
+
+        private async Task<AppUser> GetUserAndCheckIfItExists(string username)
+        {
+            var user = await _usersDAL.GetUserByUsername(username);
+            if (user is null)
+                throw new UserNotFoundException(username);
+            return user;
         }
     }
 }
