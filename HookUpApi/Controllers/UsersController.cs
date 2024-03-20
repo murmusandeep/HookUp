@@ -1,6 +1,8 @@
-﻿using HookUpBLL.Interfaces;
+﻿using Entities.Dto;
+using HookUpBLL.Interfaces;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
+using System.Security.Claims;
 
 namespace HookUpApi.Controllers
 {
@@ -21,18 +23,21 @@ namespace HookUpApi.Controllers
             return Ok(users);
         }
 
-        [HttpGet("{id}")]
-        public async Task<IActionResult> GetUserById(int id)
-        {
-            var user = await _usersBLL.GetUserById(id);
-            return Ok(user);
-        }
-
-        [HttpGet("GetUserByUsername/{username}")]
+        [HttpGet("{username}")]
         public async Task<IActionResult> GetUserByUsername(string username)
         {
             var user = await _usersBLL.GetUserByName(username);
             return Ok(user);
+        }
+
+        [HttpPut]
+        public async Task<IActionResult> UpdateUser(MemberUpdateDto member)
+        {
+            var username = User.FindFirst(ClaimTypes.NameIdentifier)?.Value;
+
+            if (await _usersBLL.UpdateUser(member, username)) return NoContent();
+
+            return BadRequest("Failed to update user");
         }
     }
 }
