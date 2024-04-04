@@ -3,3 +3,4 @@
 .github
 .vs
 .git
+./HookUpApi/appsettings.json

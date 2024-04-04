@@ -1,5 +1,4 @@
 using HookUpApi.Extensions;
-using HookUpApi.Middleware;
 
 var builder = WebApplication.CreateBuilder(args);
 
@@ -14,7 +13,8 @@ var app = builder.Build();
 
 // Configure the HTTP request pipeline.
 
-app.UseMiddleware<ExceptionMiddleware>();
+//app.UseMiddleware<ExceptionMiddleware>();
+app.UseExceptionHandler(opt => { });
 
 app.UseCors("CorsPolicy");
 

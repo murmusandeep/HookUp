@@ -1,11 +1,15 @@
-﻿using HookUpApi.Helpers;
+﻿using CloudinaryDotNet;
+using Entities.Models;
+using HookUpApi.Helpers;
 using HookUpApi.Interfaces;
+using HookUpApi.Middleware;
 using HookUpBLL;
 using HookUpBLL.Interfaces;
 using HookUpDAL;
 using HookUpDAL.Interfaces;
 using HookUpDAL.Repository;
 using Microsoft.EntityFrameworkCore;
+using Microsoft.Extensions.Options;
 
 namespace HookUpApi.Extensions
 {
@@ -35,6 +39,21 @@ namespace HookUpApi.Extensions
             services.AddScoped<IAppUserSeedBLL, AppUserSeedBLL>();
             services.AddScoped<IAppUserSeedDAL, AppUserSeedDAL>();
             services.AddScoped<ITokenHelper, TokenHelper>();
+            services.AddScoped<IPhotoBLL, PhotoBLL>();
+            services.AddScoped<IPhotoDAL, PhotoDAL>();
+
+            services.Configure<CloudinarySettings>(config.GetSection("CloudinarySettings"));
+
+            services.AddSingleton(provider =>
+            {
+                var config = provider.GetRequiredService<IOptions<CloudinarySettings>>().Value;
+                var account = new Account(config.CloudName, config.ApiKey, config.ApiSecret);
+                return new Cloudinary(account);
+            });
+
+            services.AddSingleton<ILoggerManager, LoggerManager>();
+
+            services.AddExceptionHandler<GlobalExceptionHandler>();
 
             return services;
         }

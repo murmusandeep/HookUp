@@ -6,6 +6,7 @@ import { ToastModule } from 'primeng/toast';
 import { HttpClientModule } from '@angular/common/http';
 import { TabsModule } from "ngx-bootstrap/tabs";
 import { NgxSpinnerModule } from "ngx-spinner";
+import { FileUploadModule } from 'ng2-file-upload';
 
 @NgModule({
   declarations: [],
@@ -16,7 +17,8 @@ import { NgxSpinnerModule } from "ngx-spinner";
     ToastModule,
     HttpClientModule,
     TabsModule,
-    NgxSpinnerModule.forRoot({ type: 'ball-atom' })
+    NgxSpinnerModule.forRoot({ type: 'ball-atom' }),
+    FileUploadModule
   ],
   exports: [
     BsDropdownModule,
@@ -24,7 +26,8 @@ import { NgxSpinnerModule } from "ngx-spinner";
     ToastModule,
     HttpClientModule,
     TabsModule,
-    NgxSpinnerModule
+    NgxSpinnerModule,
+    FileUploadModule
   ]
 })
 export class SharedModule { }

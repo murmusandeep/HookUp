@@ -35,7 +35,7 @@ namespace HookUpDAL
                 .ToListAsync();
         }
 
-        public async Task<bool> SaveAll()
+        public async Task<bool> SaveAllAsync()
         {
             return await _dataContext.SaveChangesAsync() > 0;
         }

@@ -15,7 +15,7 @@ namespace HookUpDAL
 
         public async Task<AppUser> GetUser(string username)
         {
-            return await _context.Users.SingleOrDefaultAsync(x => x.UserName == username.ToLower());
+            return await _context.Users.Include(p => p.Photos).SingleOrDefaultAsync(x => x.UserName == username.ToLower());
         }
 
         public async Task Register(AppUser user)

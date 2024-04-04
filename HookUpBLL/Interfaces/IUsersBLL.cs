@@ -7,5 +7,6 @@ namespace HookUpBLL.Interfaces
         Task<IEnumerable<MemberDto>> GetUsers();
         Task<MemberDto> GetUserById(int id);
         Task<MemberDto> GetUserByName(string name);
+        Task<bool> UpdateUser(MemberUpdateDto memberUpdateDto, string username);
     }
 }
