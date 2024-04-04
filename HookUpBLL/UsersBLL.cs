@@ -43,7 +43,7 @@ namespace HookUpBLL
         {
             var user = await GetUserAndCheckIfItExists(username);
             _mapper.Map(memberUpdateDto, user);
-            return await _usersDAL.SaveAll();
+            return await _usersDAL.SaveAllAsync();
         }
 
         private async Task<AppUser> GetUserAndCheckIfItExists(string username)

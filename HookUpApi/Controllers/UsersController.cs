@@ -1,8 +1,8 @@
 ﻿using Entities.Dto;
+using HookUpApi.Extensions;
 using HookUpBLL.Interfaces;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
-using System.Security.Claims;
 
 namespace HookUpApi.Controllers
 {
@@ -10,10 +10,12 @@ namespace HookUpApi.Controllers
     public class UsersController : BaseApiController
     {
         private readonly IUsersBLL _usersBLL;
+        private readonly IPhotoBLL _photoBLL;
 
-        public UsersController(IUsersBLL usersBLL)
+        public UsersController(IUsersBLL usersBLL, IPhotoBLL photoBLL)
         {
             _usersBLL = usersBLL;
+            _photoBLL = photoBLL;
         }
 
         [HttpGet]
@@ -33,11 +35,29 @@ namespace HookUpApi.Controllers
         [HttpPut]
         public async Task<IActionResult> UpdateUser(MemberUpdateDto member)
         {
-            var username = User.FindFirst(ClaimTypes.NameIdentifier)?.Value;
-
-            if (await _usersBLL.UpdateUser(member, username)) return NoContent();
-
+            if (await _usersBLL.UpdateUser(member, User.GetUsername())) return NoContent();
             return BadRequest("Failed to update user");
+        }
+
+        [HttpPost("add-photo")]
+        public async Task<IActionResult> AddPhoto(IFormFile file)
+        {
+            var result = await _photoBLL.AddPhotoAsync(User.GetUsername(), file);
+            return CreatedAtAction(nameof(GetUserByUsername), new { username = User.GetUsername() }, result);
+        }
+
+        [HttpDelete("delete-photo/{photoId}")]
+        public async Task<IActionResult> DeletePhoto(int photoId)
+        {
+            if (await _photoBLL.DeletePhotoAsync(User.GetUsername(), photoId)) return NoContent();
+            return BadRequest("Problem deleting photo");
+        }
+
+        [HttpPut("set-main-photo/{photoId}")]
+        public async Task<IActionResult> SetMainPhoto(int photoId)
+        {
+            if (await _photoBLL.SetMainPhoto(User.GetUsername(), photoId)) return NoContent();
+            return BadRequest("Problem setting main photo");
         }
     }
 }

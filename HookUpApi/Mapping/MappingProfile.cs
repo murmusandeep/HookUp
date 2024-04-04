@@ -3,6 +3,8 @@ using Entities.Dto;
 using Entities.Models;
 using HookUpDAL.Entities;
 using HookUpDAL.Extensions;
+using Photo = HookUpDAL.Entities.Photo;
+
 
 namespace HookUpApi.Mapping
 {
@@ -15,6 +17,7 @@ namespace HookUpApi.Mapping
                 .ForMember(dest => dest.Age, opt => opt.MapFrom(src => src.DateOfBirth.CalculateAge())).ReverseMap();
             CreateMap<AppUser, User>().ReverseMap();
             CreateMap<Photo, PhotoDto>().ReverseMap();
+            CreateMap<Photo, Image>().ReverseMap();
             CreateMap<MemberUpdateDto, AppUser>().ReverseMap();
         }
     }

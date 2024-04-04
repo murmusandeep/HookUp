@@ -53,7 +53,8 @@ namespace HookUpApi.Controllers
             var userDto = new UserDto
             {
                 Username = user.UserName,
-                Token = _tokenHelper.CreateToken(user)
+                Token = _tokenHelper.CreateToken(user),
+                PhotoUrl = user.Photos.FirstOrDefault(x => x.IsMain)?.Url
             };
 
             return Ok(userDto);
