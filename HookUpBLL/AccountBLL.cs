@@ -31,14 +31,13 @@ namespace HookUpBLL
 
         public async Task<User> Register(RegisterDto register)
         {
+            var appUser = _mapper.Map<AppUser>(register);
+
             using var hmac = new HMACSHA512();
 
-            var appUser = new AppUser
-            {
-                UserName = register.username.ToLower(),
-                PasswordHash = hmac.ComputeHash(Encoding.UTF8.GetBytes(register.password)),
-                PasswordSalt = hmac.Key
-            };
+            appUser.UserName = register.UserName.ToLower();
+            appUser.PasswordHash = hmac.ComputeHash(Encoding.UTF8.GetBytes(register.password));
+            appUser.PasswordSalt = hmac.Key;
 
             await _accountDAL.Register(appUser);
 
