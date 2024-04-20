@@ -21,14 +21,15 @@ namespace HookUpApi.Controllers
         [HttpPost("register")]
         public async Task<IActionResult> Register(RegisterDto register)
         {
-            if (await _accountBLL.UserExists(register.username)) return BadRequest("Username is Taken");
+            if (await _accountBLL.UserExists(register.UserName)) return BadRequest("Username is Taken");
 
             var user = await _accountBLL.Register(register);
 
             var userDto = new UserDto
             {
                 Username = user.UserName,
-                Token = _tokenHelper.CreateToken(user)
+                Token = _tokenHelper.CreateToken(user),
+                KnownAs = user.KnownAs,
             };
 
             return Ok(userDto);
@@ -54,7 +55,8 @@ namespace HookUpApi.Controllers
             {
                 Username = user.UserName,
                 Token = _tokenHelper.CreateToken(user),
-                PhotoUrl = user.Photos.FirstOrDefault(x => x.IsMain)?.Url
+                PhotoUrl = user.Photos.FirstOrDefault(x => x.IsMain)?.Url,
+                KnownAs = user.KnownAs,
             };
 
             return Ok(userDto);
