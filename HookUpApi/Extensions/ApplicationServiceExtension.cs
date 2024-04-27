@@ -55,6 +55,8 @@ namespace HookUpApi.Extensions
 
             services.AddExceptionHandler<GlobalExceptionHandler>();
 
+            services.AddScoped<LogUserActivity>();
+
             return services;
         }
     }

@@ -30,6 +30,7 @@ namespace HookUpApi.Controllers
                 Username = user.UserName,
                 Token = _tokenHelper.CreateToken(user),
                 KnownAs = user.KnownAs,
+                Gender = user.Gender
             };
 
             return Ok(userDto);
@@ -57,6 +58,7 @@ namespace HookUpApi.Controllers
                 Token = _tokenHelper.CreateToken(user),
                 PhotoUrl = user.Photos.FirstOrDefault(x => x.IsMain)?.Url,
                 KnownAs = user.KnownAs,
+                Gender = user.Gender
             };
 
             return Ok(userDto);
