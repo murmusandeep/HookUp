@@ -28,11 +28,10 @@ namespace HookUpDAL
             return user;
         }
 
-        public async Task<IEnumerable<AppUser>> GetUsers()
+        public async Task<IQueryable<AppUser>> GetUsers()
         {
-            return await _dataContext.Users
-                .Include(p => p.Photos)
-                .ToListAsync();
+            return _dataContext.Users
+                .AsQueryable();
         }
 
         public async Task<bool> SaveAllAsync()

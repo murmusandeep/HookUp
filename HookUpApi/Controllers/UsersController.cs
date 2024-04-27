@@ -1,4 +1,5 @@
 ﻿using Entities.Dto;
+using Entities.Helpers;
 using HookUpApi.Extensions;
 using HookUpBLL.Interfaces;
 using Microsoft.AspNetCore.Authorization;
@@ -19,9 +20,19 @@ namespace HookUpApi.Controllers
         }
 
         [HttpGet]
-        public async Task<IActionResult> GetUsers()
+        public async Task<IActionResult> GetUsers([FromQuery] UserParams userParams)
         {
-            var users = await _usersBLL.GetUsers();
+            var currentUser = await _usersBLL.GetUserByName(User.GetUsername());
+
+            userParams.CurrentUsername = currentUser.UserName;
+
+            if (string.IsNullOrEmpty(userParams.Gender))
+            {
+                userParams.Gender = userParams.Gender == "male" ? "female" : "male";
+            }
+
+            var users = await _usersBLL.GetUsers(userParams);
+            Response.AddPaginationHeader(new PaginationHeader(users.CurrentPage, users.PageSize, users.TotalCount, users.TotalPages));
             return Ok(users);
         }
 

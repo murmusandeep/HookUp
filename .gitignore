@@ -4,3 +4,11 @@
 .vs
 .git
 ./HookUpApi/appsettings.json
+./Entities/bin
+./Entities/obj
+./HookUpApi/bin
+./HookUpApi/obj
+./HookUpBLL/bin
+./HookUpBLL/obj
+./HookUpDAL/bin
+./HookUpDAL/obj
