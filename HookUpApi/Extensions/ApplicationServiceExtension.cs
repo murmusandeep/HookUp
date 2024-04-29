@@ -41,6 +41,8 @@ namespace HookUpApi.Extensions
             services.AddScoped<ITokenHelper, TokenHelper>();
             services.AddScoped<IPhotoBLL, PhotoBLL>();
             services.AddScoped<IPhotoDAL, PhotoDAL>();
+            services.AddScoped<ILikesBLL, LikesBLL>();
+            services.AddScoped<ILikesDAL, LikesDAL>();
 
             services.Configure<CloudinarySettings>(config.GetSection("CloudinarySettings"));
 
