@@ -1,5 +1,7 @@
-import {Component, Input, OnInit} from '@angular/core';
-import {Member} from "../../../_model/member";
+import { Component, Input, OnInit } from '@angular/core';
+import { Member } from "../../../_model/member";
+import { MemberService } from 'src/app/_services/member.service';
+import { MessageService } from 'primeng/api';
 
 @Component({
   selector: 'app-member-card',
@@ -10,8 +12,13 @@ export class MemberCardComponent implements OnInit {
 
   @Input() member: Member | undefined;
 
-  constructor() {}
+  constructor(private memberService: MemberService, private messageService: MessageService) { }
 
-  ngOnInit(): void {}
+  ngOnInit(): void { }
 
+  addLike(member: Member) {
+    this.memberService.addLike(member.userName).subscribe({
+      next: () => this.messageService.add({ severity: 'success', summary: 'Success', detail: 'You have Liked ' + member.knownAs })
+    })
+  }
 }
