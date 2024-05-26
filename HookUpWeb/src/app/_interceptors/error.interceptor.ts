@@ -33,7 +33,7 @@ export class ErrorInterceptor implements HttpInterceptor {
                 this.messageService.add({
                   severity: 'error',
                   summary: error.status.toString(),
-                  detail: error.error,
+                  detail: error.error.Message,
                 });
               }
               break;
