@@ -54,7 +54,7 @@ namespace HookUpBLL
             var message = await _messageDAL.GetMessage(id);
 
             if (message.SenderUsername != username && message.RecipientUsername != username)
-                throw new UnAuthorizedException();
+                throw new UnAuthorizedException("Unauthorize");
 
             if (message.SenderUsername == username) message.SenderDeleted = true;
             if (message.RecipientUsername == username) message.RecipientDeleted = true;

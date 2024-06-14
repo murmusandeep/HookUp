@@ -41,7 +41,7 @@ export class ErrorInterceptor implements HttpInterceptor {
               this.messageService.add({
                 severity: 'error',
                 summary: error.status.toString(),
-                detail: 'Unauthorised',
+                detail: 'UnAuthorised',
               });
               break;
             case 404:

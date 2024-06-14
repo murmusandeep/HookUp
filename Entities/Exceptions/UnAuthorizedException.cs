@@ -2,6 +2,6 @@
 {
     public sealed class UnAuthorizedException : Exception
     {
-        public UnAuthorizedException() : base("Unauthorized") { }
+        public UnAuthorizedException(string message) : base(message) { }
     }
 }

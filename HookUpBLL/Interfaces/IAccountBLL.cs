@@ -7,6 +7,6 @@ namespace HookUpBLL.Interfaces
     {
         Task<User> Register(RegisterDto register);
         Task<bool> UserExists(string username);
-        Task<User> GetUser(string username);
+        Task<User> GetUser(string username, string password);
     }
 }
