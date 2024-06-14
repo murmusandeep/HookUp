@@ -1,11 +1,10 @@
 ﻿using AutoMapper;
 using Entities.Dto;
+using Entities.Exceptions;
 using Entities.Models;
 using HookUpBLL.Interfaces;
 using HookUpDAL.Entities;
 using HookUpDAL.Interfaces;
-using System.Security.Cryptography;
-using System.Text;
 
 namespace HookUpBLL
 {
@@ -20,11 +19,16 @@ namespace HookUpBLL
             _mapper = mapper;
         }
 
-        public async Task<User> GetUser(string username)
+        public async Task<User> GetUser(string username, string password)
         {
-            var result = await _accountDAL.GetUser(username);
+            var appUser = await _accountDAL.GetUser(username);
 
-            var user = _mapper.Map<User>(result);
+            var result = await _accountDAL.CheckUserValid(appUser, password);
+
+            if (!result)
+                throw new UnAuthorizedException("UnAuthorized");
+
+            var user = _mapper.Map<User>(appUser);
 
             return user;
         }
@@ -33,13 +37,17 @@ namespace HookUpBLL
         {
             var appUser = _mapper.Map<AppUser>(register);
 
-            using var hmac = new HMACSHA512();
-
             appUser.UserName = register.UserName.ToLower();
-            appUser.PasswordHash = hmac.ComputeHash(Encoding.UTF8.GetBytes(register.password));
-            appUser.PasswordSalt = hmac.Key;
 
-            await _accountDAL.Register(appUser);
+            var result = await _accountDAL.Register(appUser, register.password);
+
+            if (!result.Succeeded)
+                throw new BadRequestException("Unable to Register");
+
+            var roleResult = await _accountDAL.AddUserRole(appUser);
+
+            if (!roleResult.Succeeded)
+                throw new BadRequestException("Unable to Add Role");
 
             var user = _mapper.Map<User>(appUser);
 

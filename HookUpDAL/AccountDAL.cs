@@ -1,33 +1,49 @@
 ﻿using HookUpDAL.Entities;
 using HookUpDAL.Interfaces;
-using HookUpDAL.Repository;
+using Microsoft.AspNetCore.Identity;
 using Microsoft.EntityFrameworkCore;
 
 namespace HookUpDAL
 {
     public class AccountDAL : IAccountDAL
     {
-        private readonly DataContext _context;
-        public AccountDAL(DataContext context)
+        private readonly UserManager<AppUser> _userManager;
+
+        public AccountDAL(UserManager<AppUser> userManager)
         {
-            _context = context;
+            _userManager = userManager;
+        }
+
+        public async Task<IdentityResult> AddUserRole(AppUser appUser)
+        {
+            return await _userManager.AddToRoleAsync(appUser, "Member");
+        }
+
+        public async Task<bool> CheckUserValid(AppUser appUser, string password)
+        {
+            var result = await _userManager.CheckPasswordAsync(appUser, password);
+            return result;
         }
 
         public async Task<AppUser> GetUser(string username)
         {
-            return await _context.Users.Include(p => p.Photos).SingleOrDefaultAsync(x => x.UserName == username.ToLower());
+            var result = await _userManager.Users
+                .Include(p => p.Photos)
+                .Include(r => r.UserRoles)
+                .ThenInclude(ur => ur.Role)
+                .SingleOrDefaultAsync(x => x.UserName == username.ToLower());
+            return result;
         }
 
-        public async Task Register(AppUser user)
+        public async Task<IdentityResult> Register(AppUser user, string password)
         {
-            _context.Users.Add(user);
-
-            await _context.SaveChangesAsync();
+            var result = await _userManager.CreateAsync(user, password);
+            return result;
         }
 
         public async Task<bool> UserExists(string username)
         {
-            return await _context.Users.AnyAsync(x => x.UserName == username.ToLower());
+            return await _userManager.Users.AnyAsync(x => x.UserName == username.ToLower());
         }
     }
 }

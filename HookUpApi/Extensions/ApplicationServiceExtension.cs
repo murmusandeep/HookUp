@@ -36,8 +36,6 @@ namespace HookUpApi.Extensions
             services.AddScoped<IAccountDAL, AccountDAL>();
             services.AddScoped<IBuggyBLL, BuggyBLL>();
             services.AddScoped<IBuggyDAL, BuggyDAL>();
-            services.AddScoped<IAppUserSeedBLL, AppUserSeedBLL>();
-            services.AddScoped<IAppUserSeedDAL, AppUserSeedDAL>();
             services.AddScoped<ITokenHelper, TokenHelper>();
             services.AddScoped<IPhotoBLL, PhotoBLL>();
             services.AddScoped<IPhotoDAL, PhotoDAL>();
@@ -45,6 +43,8 @@ namespace HookUpApi.Extensions
             services.AddScoped<ILikesDAL, LikesDAL>();
             services.AddScoped<IMessageBLL, MessageBLL>();
             services.AddScoped<IMessageDAL, MessageDAL>();
+            services.AddScoped<IAdminBLL, AdminBLL>();
+            services.AddScoped<IAdminDAL, AdminDAL>();
 
             services.Configure<CloudinarySettings>(config.GetSection("CloudinarySettings"));
 

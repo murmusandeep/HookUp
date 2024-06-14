@@ -23,6 +23,8 @@ namespace HookUpApi.Helpers
                 new Claim(JwtRegisteredClaimNames.UniqueName, user.UserName),
             };
 
+            claims.AddRange(user.Roles.Select(role => new Claim(ClaimTypes.Role, role.Name)));
+
             var cred = new SigningCredentials(_key, SecurityAlgorithms.HmacSha512Signature);
 
             var tokenDescriptor = new SecurityTokenDescriptor
