@@ -3,6 +3,7 @@ using Entities.Models;
 using HookUpApi.Helpers;
 using HookUpApi.Interfaces;
 using HookUpApi.Middleware;
+using HookUpApi.SignalR;
 using HookUpBLL;
 using HookUpBLL.Interfaces;
 using HookUpDAL;
@@ -25,9 +26,10 @@ namespace HookUpApi.Extensions
             services.AddCors(options =>
             {
                 options.AddPolicy("CorsPolicy", builder => builder
-                .AllowAnyOrigin()
                 .AllowAnyMethod()
-                .AllowAnyHeader());
+                .AllowAnyHeader()
+                .AllowCredentials()
+                .WithOrigins("https://localhost:4200"));
             });
 
             services.AddScoped<IUsersBLL, UsersBLL>();
@@ -56,10 +58,10 @@ namespace HookUpApi.Extensions
             });
 
             services.AddSingleton<ILoggerManager, LoggerManager>();
-
             services.AddExceptionHandler<GlobalExceptionHandler>();
-
             services.AddScoped<LogUserActivity>();
+            services.AddSignalR();
+            services.AddSingleton<PresenceTracker>();
 
             return services;
         }

@@ -1,5 +1,6 @@
 using HookUpApi.Data;
 using HookUpApi.Extensions;
+using HookUpApi.SignalR;
 using HookUpDAL.Entities;
 using HookUpDAL.Repository;
 using Microsoft.AspNetCore.Identity;
@@ -27,6 +28,8 @@ app.UseAuthentication();
 app.UseAuthorization();
 
 app.MapControllers();
+app.MapHub<PresenceHub>("hubs/presence");
+app.MapHub<MessageHub>("hubs/message");
 
 using var scope = app.Services.CreateScope();
 var services = scope.ServiceProvider;
@@ -37,6 +40,7 @@ try
     var userManager = services.GetRequiredService<UserManager<AppUser>>();
     var roleManger = services.GetRequiredService<RoleManager<AppRole>>();
     await context.Database.MigrateAsync();
+    await context.Database.ExecuteSqlRawAsync("TRUNCATE TABLE [Connections]");
     await Seed.SeedUsers(userManager, roleManger);
 }
 catch (Exception ex)

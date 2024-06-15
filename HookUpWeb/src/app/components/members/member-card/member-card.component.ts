@@ -2,6 +2,7 @@ import { Component, Input, OnInit } from '@angular/core';
 import { Member } from "../../../_model/member";
 import { MemberService } from 'src/app/_services/member.service';
 import { MessageService } from 'primeng/api';
+import { PresenceService } from 'src/app/_services/presence.service';
 
 @Component({
   selector: 'app-member-card',
@@ -12,7 +13,7 @@ export class MemberCardComponent implements OnInit {
 
   @Input() member: Member | undefined;
 
-  constructor(private memberService: MemberService, private messageService: MessageService) { }
+  constructor(private memberService: MemberService, private messageService: MessageService, public presenceService: PresenceService) { }
 
   ngOnInit(): void { }
 
