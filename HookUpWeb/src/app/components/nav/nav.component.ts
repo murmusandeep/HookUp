@@ -1,7 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
-import { MessageService } from 'primeng/api';
 import { AccountService } from 'src/app/_services/account.service';
+import { MemberService } from 'src/app/_services/member.service';
 
 @Component({
   selector: 'app-nav',
@@ -12,13 +12,17 @@ export class NavComponent implements OnInit {
 
   model: any = {};
 
-  constructor(public accountService: AccountService, private router: Router, private messageService: MessageService) { }
+  constructor(public accountService: AccountService, private router: Router, private memberService: MemberService) { }
 
   ngOnInit(): void { }
 
   login() {
     this.accountService.login(this.model).subscribe({
-      next: _ => this.router.navigateByUrl('/members'),
+      next: _ => {
+        this.router.navigateByUrl('/members');
+        this.model = {};
+      },
+      complete: () => this.memberService.resetUserParams()
     })
   }
 

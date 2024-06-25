@@ -21,6 +21,9 @@ namespace HookUpApi.Mapping
             CreateMap<AppRole, Role>();
             CreateMap<Photo, PhotoDto>().ReverseMap();
             CreateMap<Photo, Image>().ReverseMap();
+            CreateMap<Photo, PhotoForApprovalDto>()
+                .ForMember(dest => dest.Username, opt => opt.MapFrom(src => src.AppUser.UserName))
+                .ReverseMap();
             CreateMap<MemberUpdateDto, AppUser>().ReverseMap();
             CreateMap<RegisterDto, AppUser>().ReverseMap();
             CreateMap<Message, MessageDto>()

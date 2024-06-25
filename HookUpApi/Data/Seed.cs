@@ -31,6 +31,7 @@ namespace HookUpApi.Data
 
             foreach (var user in users)
             {
+                user.Photos.First().IsApproved = true;
                 user.UserName = user.UserName.ToLower();
                 await userManager.CreateAsync(user, "Sandeep@123");
                 await userManager.AddToRoleAsync(user, "Member");

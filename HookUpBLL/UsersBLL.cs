@@ -21,6 +21,18 @@ namespace HookUpBLL
             _mapper = mapper;
         }
 
+        public async Task<MemberDto> GetMemberAsync(string username, bool isCurrentUser)
+        {
+            var result = await _usersDAL.GetMemberAsync(username);
+
+            if (isCurrentUser) result = result.IgnoreQueryFilters();
+
+            var user = await result
+                .ProjectTo<MemberDto>(_mapper.ConfigurationProvider)
+                .FirstOrDefaultAsync();
+            return user;
+        }
+
         public async Task<MemberDto> GetUserById(int id)
         {
             var result = await _usersDAL.GetUserById(id);

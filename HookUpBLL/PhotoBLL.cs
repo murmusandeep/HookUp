@@ -35,8 +35,6 @@ namespace HookUpBLL
                 PublicId = result.PublicId,
             };
 
-            if (user.Photos.Count == 0) photo.IsMain = true;
-
             user.Photos.Add(photo);
 
             if (await _usersDAL.SaveAllAsync())
@@ -53,7 +51,7 @@ namespace HookUpBLL
 
             var photo = await CheckIfPhotoExists(user, photoId);
 
-            if (photo.IsMain) throw new BadRequestException("You cannot delete your main photo");
+            if (photo == null || photo.IsMain) throw new BadRequestException("You cannot delete your main photo");
 
             if (photo.PublicId != null)
             {
@@ -100,6 +98,55 @@ namespace HookUpBLL
                 throw new PhotoNotFoundException(photoId);
 
             return photo;
+        }
+
+        public async Task<IEnumerable<PhotoForApprovalDto>> GetUnapprovedPhotos()
+        {
+            var result = await _photoDAL.GetUnapprovedPhotos();
+
+            var photoForApprovalDtos = _mapper.Map<IEnumerable<PhotoForApprovalDto>>(result);
+
+            return photoForApprovalDtos;
+        }
+
+        public async Task<bool> RemovePhoto(int photoId)
+        {
+            var photo = await _photoDAL.GetPhotoById(photoId);
+
+            if (photo == null)
+                throw new PhotoNotFoundException(photoId);
+
+            if (photo.PublicId != null)
+            {
+                var result = await _photoDAL.DeletePhotoAsync(photo.PublicId);
+                if (result.Result == "ok")
+                {
+                    _photoDAL.RemovePhoto(photo);
+                }
+            }
+            else
+            {
+                _photoDAL.RemovePhoto(photo);
+            }
+
+            return await _photoDAL.SaveAllAsync();
+        }
+
+        public async Task<bool> ApprovePhoto(int photoId)
+        {
+            var photo = await _photoDAL.GetPhotoById(photoId);
+
+            if (photo == null)
+                throw new PhotoNotFoundException(photoId);
+
+            photo.IsApproved = true;
+            var user = await _usersDAL.GetUserByPhotoId(photoId);
+
+            if (user == null)
+                throw new UserNotFoundPhotoIdException(photoId);
+
+            if (!user.Photos.Any(x => x.IsMain)) photo.IsMain = true;
+            return await _photoDAL.SaveAllAsync();
         }
     }
 }
