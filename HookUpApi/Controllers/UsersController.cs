@@ -39,8 +39,9 @@ namespace HookUpApi.Controllers
         [HttpGet("{username}")]
         public async Task<IActionResult> GetUserByUsername(string username)
         {
-            var user = await _usersBLL.GetUserByName(username);
-            return Ok(user);
+            var currentUsername = User.GetUsername();
+            var result = await _usersBLL.GetMemberAsync(username, isCurrentUser: currentUsername == username);
+            return Ok(result);
         }
 
         [HttpPut]

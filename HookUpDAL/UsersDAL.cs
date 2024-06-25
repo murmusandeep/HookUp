@@ -14,10 +14,29 @@ namespace HookUpDAL
             _dataContext = dataContext;
         }
 
+        public async Task<IQueryable<AppUser>> GetMemberAsync(string username)
+        {
+            var query = _dataContext.Users
+                 .Where(x => x.UserName == username)
+                 .AsQueryable();
+            return query;
+        }
+
         public async Task<AppUser> GetUserById(int id)
         {
             var user = await _dataContext.Users.FindAsync(id);
             return user;
+        }
+
+        public async Task<AppUser> GetUserByPhotoId(int photoId)
+        {
+            var result = await _dataContext.Users
+                .Include(p => p.Photos)
+                .IgnoreQueryFilters()
+                .Where(p => p.Photos.Any(p => p.Id == photoId))
+                .FirstOrDefaultAsync();
+
+            return result;
         }
 
         public async Task<AppUser> GetUserByUsername(string username)

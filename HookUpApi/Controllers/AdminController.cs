@@ -7,10 +7,12 @@ namespace HookUpApi.Controllers
     public class AdminController : BaseApiController
     {
         private readonly IAdminBLL _adminBLL;
+        private readonly IPhotoBLL _photoBLL;
 
-        public AdminController(IAdminBLL adminBLL)
+        public AdminController(IAdminBLL adminBLL, IPhotoBLL photoBLL)
         {
             _adminBLL = adminBLL;
+            _photoBLL = photoBLL;
         }
 
         [Authorize(Policy = "RequireAdminRole")]
@@ -33,9 +35,28 @@ namespace HookUpApi.Controllers
 
         [Authorize(Policy = "ModeratePhotoRole")]
         [HttpGet("photos-to-moderate")]
-        public IActionResult GetPhotoForModeration()
+        public async Task<IActionResult> GetPhotosForModeration()
         {
-            return Ok("Admin or Moderator can see this");
+            var photos = await _photoBLL.GetUnapprovedPhotos();
+            return Ok(photos);
+        }
+
+        [Authorize(Policy = "ModeratePhotoRole")]
+        [HttpPost("approve-photo/{photoId}")]
+        public async Task<IActionResult> ApprovePhoto(int photoId)
+        {
+            var result = await _photoBLL.ApprovePhoto(photoId);
+            if (!result) return BadRequest("Could not able to Approve Photo");
+            return Ok();
+        }
+
+        [Authorize(Policy = "ModeratePhotoRole")]
+        [HttpPost("reject-photo/{photoId}")]
+        public async Task<IActionResult> RejectPhoto(int photoId)
+        {
+            var result = await _photoBLL.RemovePhoto(photoId);
+            if (!result) return BadRequest("Could not able to Reject Photo");
+            return Ok();
         }
     }
 }
